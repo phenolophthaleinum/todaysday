@@ -1,0 +1,306 @@
+/* html { 
+    font-size: calc(1em + 1vw); 
+} */
+.card-container {
+    /* width:600px;
+    height:600px; */
+    /* float:left; */
+    /* margin-right:10px; */
+    /* width: 100%; 
+    max-width: 400px; 
+    height: auto; */
+    position:relative;
+    /* width: 100vmin;
+    height: 100vmin; */
+}
+
+.card-container div {
+    position: absolute;
+    width: 6%;
+    height: 9%;
+    transform: translateX(-50%);
+    font-size: calc(0.7rem + 1vw);
+}
+
+.jumbotron-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    perspective: 1500px; /* Set perspective for 3D effect */
+    transform-style: preserve-3d;
+    /* z-index: 1; */
+}
+
+.jumbotron-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden; /* Ensure back is hidden when flipped */
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: coral; /* Ensure text is readable over the image */
+    text-align: center;
+    z-index: 3;
+    font-size: calc(1rem + .6vw);
+}
+
+#tx1 {
+    top: 15% !important;
+}
+
+#tx2 {
+    top: 85% !important;
+    left: 30% !important;
+}
+
+#tx3 {
+    top: 15% !important;
+    left: 30% !important;
+}
+
+#tx4 {
+    top: 20% !important;
+    left: 60% !important;
+}
+
+#tx5 {
+    top: 55% !important;
+    left: 40% !important;
+}
+
+#bt1 {
+    top: 85% !important;
+    left: 30% !important;
+}
+
+.btn-outline-dark {
+    color: coral;
+    border-color: coral;
+}
+
+/* #tx3 .caption {
+    word-wrap: break-word !important;
+    text-wrap: pretty !important;
+} */
+
+@media (max-width: 760px){
+    .overlay-text .caption {
+      font-size: 1.5rem;
+    }
+  }
+
+.overlay-text .caption {
+    /* text-align: center; */
+    display: flex;
+    /* position: relative; */
+    /* font-size: calc(1rem + .6vw); */
+    /* font-size: 70%; */
+    /* font-weight: bolder; */
+    /* bottom: -30px; */
+    text-wrap: nowrap;
+    transition: 0.5s;
+  }
+
+.jumbotron-face img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+#jb-front {
+    position: relative;
+    /* background: url('img/1.jpg'); */
+}
+
+#jb-back {
+    position: relative;
+    /* background: url('img/2.jpg'); */
+}
+
+.jumbotron-front {
+    z-index: 2; /* Ensure front is on top initially */
+}
+
+.jumbotron-back {
+    /* background: url('img/2.jpg'); */
+    transform: rotateY(180deg); /* Flip the back by 180 degrees initially */
+}
+
+.jumbotron-container.flipped .jumbotron-front {
+    transform: rotateY(180deg); /* Flip front when container is flipped */
+}
+
+.jumbotron-container.flipped .jumbotron-back {
+    transform: rotateY(360deg); /* Flip back to show when container is flipped */
+}
+
+.card-container img {
+    width: 100%; /* Ensure the images scale to the container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove image margin */
+}
+
+.card-front, .card-back {
+    width:100%;
+    height:100%;
+    /* position:absolute; */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    background: url('img/1.jpg');
+    /* -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s; */
+}
+
+.card-back {
+    background: url('img/2.jpg');
+    /* -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg); */
+}
+
+.shadow-override {
+    box-shadow: 0 .1rem 1.5rem rgba(0,0,0,.3)!important;
+  }
+
+  /* #living-room {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    z-index: 1000;
+    position: absolute;
+    cursor: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='36px' height='36px' viewBox='0 0 58 58' transform='rotate(30)'%3E%3Cline stroke='%23888888' stroke-width='4px' stroke-linecap='round' stroke-miterlimit='10' x1='29' y1='18' x2='29' y2='57'/%3E%3Ccircle fill='%23DD352E' cx='29' cy='14' r='10'/%3E%3C/svg%3E%0A") 36 36, move
+  } */
+  .balloon {
+    position: relative;
+    transition: transform 1s ease-out
+  }
+  
+  .helium {
+    color: inherit;
+    background: initial;
+    transition: width .6s, height .6s, bottom .8s;
+    transition: transform 2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    height: 100px;
+    margin: .25rem;
+    border-radius: 50% 50% 50% 50%/40% 40% 60% 60%;
+    box-shadow: inset -5px -5px 0 rgba(0, 0, 0, .07), 0 0 2px 2px rgba(0, 0, 0, .1), 0 0 8px 4px rgba(0, 0, 0, .03);
+    animation: 5s linear 1 alternate forwards flyUp;
+    position: absolute;
+    background-color: currentColor
+  }
+  
+  .knot {
+    margin-top: 94px;
+    border-right: 4px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-bottom-color: currentColor;
+    border-left: 4px solid transparent;
+    animation: 2s ease 0s infinite alternate sway;
+    transition: border-bottom 2s;
+    z-index: -1
+  }
+  
+  .string {
+    position: absolute;
+    left: -1px;
+    display: block;
+    width: 2px;
+    height: 100px;
+    margin-top: 12px;
+    background: rgba(0, 0, 0, .15);
+    opacity: 1;
+    transition: opacity 2s;
+    mix-blend-mode: lighten;
+    user-select: none;
+    z-index: -1;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .1)
+  }
+  
+  .popped .knot {
+    border-bottom-width: 5px
+  }
+  
+  .popped.helium {
+    width: 15px;
+    height: 5px
+  }
+  
+  .popped .string {
+    opacity: 0;
+    transition: opacity .5s
+  }
+  
+  .popped {
+    transition: width 5s;
+    animation: 3s linear 0s 1 forwards noAir;
+    box-shadow: none !important
+  }
+  
+  @keyframes flyUp {
+    0% {
+      transform: translateY(90vh)
+    }
+  
+    100% {
+      transform: translateY(0)
+    }
+  }
+  
+  @keyframes sway {
+  
+    0%,
+    100% {
+      transform: translateX(-5px)
+    }
+  
+    50% {
+      transform: translateX(0)
+    }
+  }
+  
+  @keyframes noAir {
+    0% {
+      transform: translate(0, 20vh)
+    }
+  
+    100% {
+      transform: translate(0, 80vh)
+    }
+  }
+
+/* confetti */
+.overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: opacity 0.5s;
+    user-select: none;
+    z-index: -1;
+  }
+
+  .confetti {
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    opacity: 0.7;
+  }
+
+  .overlay-text .tx1 {
+    top: 60%;
+    left: 50%;
+    text-wrap: nowrap;
+  }

@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>todaysday</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+  </head>
+  <body>
+    <!-- <h1>Hello, world!</h1> -->
+    
+    <div class="container p-5">
+        <!-- <div class="p-4 mb-4 bg-body-tertiary rounded-3 shadow-override"> -->
+            <div class="jumbotron-container mx-auto"> <!-- Container for the flipping jumbotron -->
+            <!-- Front Side of Jumbotron -->
+                <div class="jumbotron-face jumbotron-front mb-4">
+                    <div class="container-fluid py-5 bg-body-tertiary rounded-3 shadow-override" id="jb-front">
+                        <img src="img/1.png" class="img-fluid" alt="...">
+                        <div class="overlay-text" id="tx1">
+                            <!-- <div class="tx1"> -->
+                                <h1 class="caption display-5 fw-bold">Are you today's date?</h1>
+                                <!-- <p class="fs-4">This is the back side of the jumbotron with text overlay.</p> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="overlay-text" id="tx2">
+                            <h5 class=" fw-bold">click here</h5>
+                        </div>
+                        <!-- <div class="overlay-text">
+                            <h1 class="display-5 fw-bold">Back of Jumbotron</h1>
+                            <p class="fs-4">This is the back side of the jumbotron with text overlay.</p>
+                        </div> -->
+                        <!-- <div class="card-container"> -->
+                            <!-- <div class="tx1"> -->
+                                <!-- <h1 class="caption display-5 fw-bold">Back of Jumbotron</h1> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                        <!-- <h1 class="display-5 fw-bold">Front of Jumbotron</h1>
+                        <p class="col-md-8 fs-4">This is the front side of the jumbotron. It flips on click!</p>
+                        <button class="btn btn-primary btn-lg" type="button">Flip to Back</button> -->
+                    </div>
+                </div>
+                <!-- Back Side of Jumbotron -->
+                <div class="jumbotron-face jumbotron-back mb-4">
+                    <div class="container-fluid py-5 bg-body-tertiary rounded-3 shadow-override" id="jb-back">
+                        <img src="img/2.png" class="img-fluid" alt="...">
+                        <div class="overlay-text" id="tx3">
+                            <!-- <div class="tx1"> -->
+                                <h1 class="caption display-5 fw-bold">Sure you are,</h1>
+                                <!-- <p class="fs-4">This is the back side of the jumbotron with text overlay.</p> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="overlay-text" id="tx4">
+                            <!-- <div class="tx1"> -->
+                                <h1 class="caption display-5 fw-bold">because it's your</h1>
+                                <!-- <p class="fs-4">This is the back side of the jumbotron with text overlay.</p> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="overlay-text" id="tx5">
+                            <!-- <div class="tx1"> -->
+                                <h1 class="caption display-5 fw-bold"></h1>
+                                <!-- <p class="fs-4">This is the back side of the jumbotron with text overlay.</p> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="overlay-text" id="bt1">
+                            <!-- <div class="tx1"> -->
+                                <button type="button" id="balloons-btn" class="btn btn-outline-dark btn-sm">Get your balloons!</button>
+                                <!-- <p class="fs-4">This is the back side of the jumbotron with text overlay.</p> -->
+                            <!-- </div> -->
+                        </div>
+                        <!-- <h1 class="display-5 fw-bold">Back of Jumbotron</h1>
+                        <p class="col-md-8 fs-4">This is the back side of the jumbotron. You can flip it back.</p>
+                        <button class="btn btn-secondary btn-lg" type="button">Flip to Front</button> -->
+                    </div>
+                </div>
+            </div>
+                <!-- <div class="card-container"> -->
+                    <!-- <div class="card-back">
+                        <img src="img/1.jpg" class="img-fluid" alt="...">
+                    </div>
+                    <div class="card-front">
+                        <img src="img/2.jpg" class="img-fluid" alt="...">
+                    </div> -->
+                    <!-- <div class="card-back"></div> -->
+                    <!-- <div class="card-front"></div> -->
+                <!-- </div> -->
+        <!-- </div> -->
+        <div id="living-room" class="living-room" >
+            <!-- <a class="unpop" onclick="unpopBalloons()">unpop</a> -->
+        </div>
+        <div class="overlay" id="overlay"></div>
+    </div>
+    <!-- <button onclick="playSound('bell.ogg');">Play</button>  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function playSound(url, volume = 1) {
+            const audio = new Audio(url);
+            audio.volume = volume;
+            audio.play();
+        }
+        const card = document.querySelector('.card-container');
+        gsap.set(card, {
+            transformStyle: 'preserve-3d',
+            transformPerspective: 1000});
+        const front = document.querySelector('.card-front');
+        const back = document.querySelector('.card-back');
+        gsap.set(back, {rotationY: -180});
+        // const tl = gsap.timeline({ paused: true })
+        //     .to(front, { duration: 2.5, rotationY: 180, ease: "power1.inOut" })
+        //     .to(back, { duration: 2.5, rotationY: 0, ease: "power1.inOut" }, 0)
+        //     .to(card, { z: 50, ease: "power1.inOut" }, 0)
+        //     .to(card, { z: 0, ease: "power1.inOut" }, 0.5);
+        // how to reverse on second click?
+
+        // card.addEventListener('click', () => {
+        //     if (tl.reversed()) {
+        //         tl.play();
+        //     } else {
+        //         tl.reverse();
+        //     }
+        // });
+        let firstTimeFlip = true;
+        const jumbotronContainer = document.querySelector('.jumbotron-container');
+        const btnFlipToBack = document.querySelector('.jumbotron-front .btn');
+        const btnFlipToFront = document.querySelector('.jumbotron-back .btn');
+        const jbFront = document.getElementById('jb-front');
+        const jbBack = document.getElementById('jb-back');
+        const tx1 = document.getElementById('tx1');
+        const tx2 = document.getElementById('tx2');
+        const tx3 = document.getElementById('tx3');
+        const tx4 = document.getElementById('tx4');
+        const tx5 = document.getElementById('tx5');
+        const bt1 = document.getElementById('bt1');
+        const balloonsBtn = document.getElementById('balloons-btn');
+
+        gsap.set(jbFront, {
+            opacity: 0,
+            y: 200,
+        });
+        gsap.set(tx1, {
+            opacity: 0,
+            y: -50,
+        });
+        gsap.set(tx2, {
+            opacity: 0,
+            y: 50,
+        });
+        gsap.set(tx3, {
+            opacity: 0,
+            x: 50,
+        });
+        gsap.set(tx4, {
+            opacity: 0,
+            x: -50,
+        });
+        gsap.set(bt1, {
+            opacity: 0,
+            y: 50,
+        });
+        gsap.to(tx1, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 1.2,
+            ease: 'power2.inOut',
+            color: 'black',
+        });
+        gsap.to(tx2, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 2,
+            ease: 'power2.inOut',
+            color: 'coral',
+        });
+        const tl_tx2 = gsap.timeline({repeat:-1, repeatDelay:1, yoyo:true});
+        tl_tx2.to(tx2, {
+            // y: 10,
+            duration: 0.4,
+            ease: 'power2.inOut',
+            color: 'black'
+        });
+        // gsap.to(tx2, {
+        //     yoyo: true,
+        //     duration: 3,
+        //     repeat: -1,
+        //     ease: 'power2.inOut',
+        //     color: 'coral',
+        //     repeatDelay:0, 
+        // });
+
+        gsap.to(jbFront, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 1,
+            ease: 'power2.inOut',
+        });
+
+        tx3_anim = gsap.to(tx3, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.5,
+                    delay: 1,
+                    ease: 'power2.inOut',
+                    color: 'black',
+                    paused: true,
+                });
+
+        tx4_anim = gsap.to(tx4, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.5,
+                    delay: 1.3,
+                    ease: 'power2.inOut',
+                    color: 'black',
+                    paused: true,
+                });
+        
+        bt1_anim = gsap.to(bt1, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 6,
+            ease: 'power2.inOut',
+            //color: 'black',
+            paused: true,
+        });
+        const tl_bt1 = gsap.timeline({repeat:-1, repeatDelay:1, yoyo:true});
+        tl_bt1.to(balloonsBtn, {
+            // y: 10,
+            duration: 0.4,
+            ease: 'power2.inOut',
+            color: 'black',
+            borderColor: 'black'
+        });
+        
+        var rect = tx5.getBoundingClientRect();
+        console.log(rect.top, rect.right, rect.bottom, rect.left);
+
+        addEventListener("resize", (event) => {
+            rect = tx5.getBoundingClientRect();
+            console.log(rect.top, rect.right, rect.bottom, rect.left);
+            console.log(window.scrollY, window.scrollX);
+        });
+
+        const tl_tx5 = gsap.timeline({repeat:-1, repeatDelay:1, yoyo:true, paused:true, delay: 2.8, onRepeat: spawnConfetti, onRepeatParams: [window.scrollY + rect.left, window.scrollX + rect.top], onStart: playSound, onStartParams: ['party1.mp3', 0.3]});
+        tl_tx5.to("#tx5 .caption", {duration: 2, text:"10/10 BIRTHDAY!", ease: "power2.inOut", color: 'black'});
+        // var rect = tx5.getBoundingClientRect();
+        // console.log(rect.top, rect.right, rect.bottom, rect.left);
+
+        gsap.set(jumbotronContainer, {
+            transformStyle: 'preserve-3d',
+            transformPerspective: 1000
+        });
+        // GSAP timeline for flipping animation
+        const tl = gsap.timeline({ paused: true })
+            .to(jumbotronContainer, { duration: 1, rotationY: 180, ease: "power2.inOut" });
+
+        // Event listener to flip to back
+        jbFront.addEventListener('click', () => {
+            tl.play(); // Play the animation forward
+            if (firstTimeFlip) {
+                tx3_anim.play();
+                tx4_anim.play();
+                tl_tx5.play();
+                bt1_anim.play();
+                firstTimeFlip = false;
+            }
+        });
+
+        // Event listener to flip to front
+        jbBack.addEventListener('click', () => {
+            tl.reverse(); // Reverse the animation
+        });
+
+        // confetti
+        let isMouseDown = false;
+        const overlay = document.getElementById('overlay');
+
+        // document.addEventListener('mousedown', function(event) {
+        // if (overlay.style.opacity !== '0') {
+        //     overlay.style.opacity = '0';
+        //     setTimeout(() => {
+        //     overlay.style.display = 'none';
+        //     }, 500);
+        // }
+        // isMouseDown = true;
+        // spawnConfetti(event.clientX, event.clientY);
+        // });
+
+        // document.addEventListener('mouseup', function() {
+        // isMouseDown = false;
+        // });
+
+        // document.addEventListener('mousemove', function(event) {
+        // if (isMouseDown) {
+        //     spawnConfetti(event.clientX, event.clientY);
+        // }
+        // });
+
+        function spawnConfetti(x, y) {
+        for (let i = 0; i < 6; i++) {
+            createConfetti(x, y);
+        }
+        }
+
+        function createConfetti(x, y) {
+        const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#e67e22'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = randomColor;
+        confetti.style.left = x + 'px';
+        confetti.style.top = y + 'px';
+
+        document.body.appendChild(confetti);
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 2 + Math.random() * 2;
+        const rotationSpeed = (Math.random() - 0.5) * 10;
+
+        let xVelocity = velocity * Math.cos(angle);
+        let yVelocity = velocity * Math.sin(angle);
+        const gravity = 0.1;
+
+        function animateConfetti() {
+            xVelocity *= 0.99;
+            yVelocity += gravity;
+            x += xVelocity;
+            y += yVelocity;
+
+            const currentRotation = parseFloat(confetti.style.transform.replace('rotate(', '').replace('deg)', '')) || 0;
+            confetti.style.transform = `rotate(${currentRotation + rotationSpeed}deg)`;
+
+            confetti.style.left = x + 'px';
+            confetti.style.top = y + 'px';
+
+            // console.log(y, window.innerHeight);
+            if (y < window.innerHeight - 35) {
+            requestAnimationFrame(animateConfetti);
+            } else {
+            confetti.remove();
+            }
+        }
+
+        requestAnimationFrame(animateConfetti);
+        }
+
+        // balloons
+        var livingroom = document.querySelector("#living-room");
+        var palette = ["#eb4d4b", "#badc58", "#f9ca24", "#22a6b3"];
+        const popSounds = ["pop1.mp3", "pop2.mp3", "pop3.mp3"];
+
+        const $ = (query) => document.querySelector(query);
+        const $$ = (query) => Array.from(document.querySelectorAll(query));
+        const random = (min = 0, max = 10) =>
+        Math.floor(Math.random() * (max - min + 1)) + min;
+
+        const getBalloonStyle = () =>
+        [
+            `transform: rotate(${Math.floor(random(-15, 15) * 1.25)}deg)`,
+            `translateX(${random(
+            -$("#living-room").clientWidth / 2,
+            $("#living-room").clientWidth
+            )}px)`,
+            `translateY(${random(-100, 100)}px);`,
+            `color: ${palette[random(0, palette.length - 1)]};`
+        ].join(" ");
+
+        function createElement(type, { style = "", ...props }) {
+        const el = Object.assign(document.createElement(type), props);
+        if (typeof style === "object") {
+            Object.assign(el.style, style);
+        } else if (style.length) {
+            el.style.cssText = style;
+        }
+        return el;
+        }
+
+        function unpopBalloons() {
+        Array.from(document.querySelectorAll(".popped")).forEach((e) => {
+            e.classList.remove("popped");
+            e.style.cssText = "";
+        });
+        }
+
+        function partyTime() {
+        let numberOfBalloons = (window.innerWidth / 80) * 3;
+        for (var i = 0; i < numberOfBalloons; i++) {
+            const balloon = createElement("div", {
+            className: "balloon",
+            style: getBalloonStyle(),
+            innerHTML: `<div class="helium"><div class="knot"><div class="string"></div></div></div>`
+            });
+            livingroom.appendChild(balloon);
+            balloon.addEventListener("click", function (ev) {
+            Object.assign(ev.target.style, {
+                transition: `all ${random(200, 800)}ms`
+            });
+            ev.target.classList.add("popped");
+            playSound(popSounds[random(0, popSounds.length - 1)]);
+            });
+        }
+        }
+        // partyTime();
+        balloonsBtn.addEventListener('click', () => {
+            partyTime();
+        });
+        
+
+        document.addEventListener('click', function(event) {
+            // if (overlay.style.opacity !== '0') {
+            //     overlay.style.opacity = '0';
+            //     setTimeout(() => {
+            //     overlay.style.display = 'none';
+            //     }, 500);
+            // }
+            // isMouseDown = true;
+            console.log(event.clientX, event.clientY);
+            spawnConfetti(event.clientX, event.clientY);
+            });
+    </script>
+  </body>
+</html>
